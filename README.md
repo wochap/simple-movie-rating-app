@@ -41,6 +41,8 @@ $ yarn test:coverage
 * Vuex (state management)
 * SCSS (css preprocessor)
 
+### [Design](https://dribbble.com/shots/2955056-Movie/attachments/614268)
+
 ### Structure
 
 * Vue: [by route hierarchy](https://gist.github.com/ryanflorence/daafb1e3cb8ad740b346)
