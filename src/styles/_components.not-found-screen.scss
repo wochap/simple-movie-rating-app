@@ -1,0 +1,20 @@
+/**
+ * 1. Perfect verticual center.
+ * 2. Responsive font size.
+ */
+
+.c-not-found-screen {
+  height: 100vh;
+  text-align: center;
+}
+
+  .c-not-found-screen__title {
+
+    span {
+      display: block;
+      font-range: 25rem 75rem; /* [2] */
+      font-size: responsive 8rem 12rem; /* [2] */
+      line-height: 1;
+      text-transform: uppercase;
+    }
+  }
