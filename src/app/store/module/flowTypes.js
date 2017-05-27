@@ -21,7 +21,9 @@ export type Movie = {
   actors: Ids,
   directorName: string,
   rating: number,
-  genre: string
+  genre: string,
+  imageUrl?: string,
+  coverImageUrl?: string
 }
 
 export type Actors = Array<Actor>

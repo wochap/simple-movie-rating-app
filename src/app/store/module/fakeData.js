@@ -8,7 +8,8 @@ export const fakeMovies = [
     directorName: 'Martin Scorsese',
     rating: 8.2,
     genre: 'Biography, Comedy, Crime',
-    imageUrl: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjIxMjgxNTk0MF5BMl5BanBnXkFtZTgwNjIyOTg2MDE@._V1_SY1000_CR0,0,674,1000_AL_.jpg'
+    imageUrl: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMjIxMjgxNTk0MF5BMl5BanBnXkFtZTgwNjIyOTg2MDE@._V1_SY1000_CR0,0,674,1000_AL_.jpg',
+    coverImageUrl: 'https://i.ytimg.com/vi/efSS1ov_Yq8/maxresdefault.jpg'
   }, {
     id: '1',
     name: 'Titanic',
@@ -18,7 +19,8 @@ export const fakeMovies = [
     directorName: 'James Cameron',
     rating: 7.7,
     genre: 'Drama, Romance',
-    imageUrl: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SY1000_CR0,0,671,1000_AL_.jpg'
+    imageUrl: 'https://images-na.ssl-images-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_SY1000_CR0,0,671,1000_AL_.jpg',
+    coverImageUrl: 'http://donde-esta.org/wp-content/uploads/2016/10/titanic-2.jpg'
   }
 ]
 
