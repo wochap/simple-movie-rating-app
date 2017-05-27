@@ -5874,6 +5874,10 @@ sane@~1.6.0:
     walker "~1.0.5"
     watch "~0.10.0"
 
+sass-bem-constructor@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/sass-bem-constructor/-/sass-bem-constructor-1.1.0.tgz#1a5a78283b29b96faf65d6dd74d4d1c9b893549b"
+
 sass-graph@^2.1.1:
   version "2.2.4"
   resolved "https://registry.yarnpkg.com/sass-graph/-/sass-graph-2.2.4.tgz#13fbd63cd1caf0908b9fd93476ad43a51d1e0b49"
@@ -5892,6 +5896,10 @@ sass-loader@^6.0.5:
     loader-utils "^1.0.1"
     lodash.tail "^4.1.1"
     pify "^2.3.0"
+
+sass-mq@^3.2.9:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/sass-mq/-/sass-mq-3.3.2.tgz#3472e04c31a432bcd55b3b604edc72ae9a4def1a"
 
 sax@^1.2.1, sax@~1.2.1:
   version "1.2.2"
@@ -7002,6 +7010,39 @@ window-size@^0.1.2:
 window-size@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.2.0.tgz#b4315bb4214a3d7058ebeee892e13fa24d98b075"
+
+wocss-generic-sanitize@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/wocss-generic-sanitize/-/wocss-generic-sanitize-1.0.0.tgz#4e2dd29a8c0fb999ce8ffd904daa25c814618af0"
+
+wocss-settings-breakpoints@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/wocss-settings-breakpoints/-/wocss-settings-breakpoints-2.0.2.tgz#e9f9f51b3f19e30cc912a45f659ee700caaf6c67"
+
+wocss-settings-colors@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/wocss-settings-colors/-/wocss-settings-colors-2.0.1.tgz#9c82d2cb721fac1c498eda945154f4c515c19079"
+
+wocss-settings-global@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/wocss-settings-global/-/wocss-settings-global-1.2.1.tgz#a49ecca9037fe96d457a7ba8964bf4eea6ac6e7a"
+
+wocss-settings-typography@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/wocss-settings-typography/-/wocss-settings-typography-2.0.0.tgz#73c9e3440567ef669847099195e4c801ad3d69d9"
+
+wocss-tools-bem-constructor@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/wocss-tools-bem-constructor/-/wocss-tools-bem-constructor-1.0.4.tgz#5c1030fc5959db825020a77e67abe2fb494e1d40"
+  dependencies:
+    sass-bem-constructor "^1.1.0"
+
+wocss-tools-mq@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/wocss-tools-mq/-/wocss-tools-mq-1.1.0.tgz#46e2c10cfbb770486070e10f5ca7a62fd76c9970"
+  dependencies:
+    sass-mq "^3.2.9"
+    wocss-settings-breakpoints "^2.0.2"
 
 wordwrap@0.0.2:
   version "0.0.2"
