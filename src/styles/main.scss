@@ -12,6 +12,8 @@
 @import '~wocss-tools-bem-constructor';
 @import '~wocss-tools-mq';
 
+@import 'tools.shared-styles';
+
 
 
 
@@ -24,23 +26,24 @@
 
 
 // ELEMENTS
-// @import "example.elements.page";
-// @import "example.elements.headings";
-// @import "example.elements.links";
+@import "elements.page";
+@import "elements.headings";
+@import "elements.links";
 
 
 
 
 
 // OBJECTS
-// @import "example.objects.buttons";
+@import "objects.button";
 
 
 
 
 
 // COMPONENTS
-// @import "example.components.buttons";
+@import "components.button";
+@import "components.link";
 
 
 

@@ -1,0 +1,25 @@
+// check dependencies
+
+$wocss-settings-global: false !default;
+
+
+@if ($wocss-settings-global == false) {
+  @error "[elements-links] Have you included the wocss-settings-global module?"
+};
+
+
+
+
+
+/*------------------------------------*\
+  #LINKS
+\*------------------------------------*/
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:not([class]) {
+  @include link();
+}

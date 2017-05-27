@@ -1,0 +1,15 @@
+@mixin link () {
+  border-bottom: 1px dotted currentColor;
+  color: $global-color-primary;
+  outline: none;
+
+  &:active,
+  &:focus,
+  &:hover {
+    border-bottom-style: solid;
+  }
+
+  &:hover {
+    color: scale-color($global-color-primary, $lightness: -10%);
+  }
+}
