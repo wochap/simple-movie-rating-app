@@ -1,0 +1,29 @@
+/*------------------------------------*\
+  #HERO
+\*------------------------------------*/
+
+
+/**
+ * 1. Perfect horizontal center.
+ * 2. Perfect vertical center.
+ */
+
+.o-hero {
+  align-items: center; /* [1] */
+  display: flex; /* [2] */
+  flex-direction: column; /* [2] */
+  min-height: 100%;
+  width: 100%;
+
+  &::after,
+  &::before {
+    content: "";
+    flex: 1 1 0; /* [2] */
+    width: 0;
+  }
+}
+
+  .o-hero__body {
+    flex: none; /* [2] */
+    width: auto;
+  }
