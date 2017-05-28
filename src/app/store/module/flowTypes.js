@@ -37,6 +37,11 @@ export type Search = {
 export type UpdateMovieInFormPayload = Movie | null
 export type UpdateActorInFormPayload = Actor | null
 
+export type Dialogs = {
+  movie: boolean,
+  actor: boolean
+}
+
 export type State = {
   search: Search,
   actors: Actors,
@@ -45,10 +50,7 @@ export type State = {
   movieInForm: UpdateMovieInFormPayload,
   actorInForm: UpdateActorInFormPayload,
 
-  dialogs: {
-    movie: boolean,
-    actor: boolean
-  }
+  dialogs: Dialogs
 }
 
 // root state key resource

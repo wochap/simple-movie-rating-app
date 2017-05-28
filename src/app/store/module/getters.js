@@ -7,7 +7,8 @@ import type {
   Movie,
   Actors,
   Movies,
-  Search
+  Search,
+  Dialogs
 } from './flowTypes'
 
 export default {
@@ -87,6 +88,13 @@ export default {
       ...formatMovie(movie),
       actors: movieActors.map(formatActor)
     }
+  },
+
+  getActorDialogValue ({dialogs}: {dialogs: Dialogs}) {
+    return dialogs.actor
+  },
+  getMovieDialogValue ({dialogs}: {dialogs: Dialogs}) {
+    return dialogs.movie
   }
 }
 
