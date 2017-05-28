@@ -19,13 +19,11 @@
 </template>
 
 <script>
-  import MovieCard from './MovieCard'
   import MovieCardPlaceholder from './MovieCardPlaceholder'
   import {mapGetters} from 'vuex'
 
   export default {
     components: {
-      MovieCard,
       MovieCardPlaceholder
     },
     computed: {
