@@ -1,5 +1,15 @@
 <template>
   <div class="c-movie-card">
+    <button
+      v-if="withDelete"
+      class="o-button c-movie-card__delete-button"
+      @click="onDelete"
+      title="Delete movie"
+      aria-label="Delete movie"
+    >
+      x
+    </button>
+
     <router-link
       :to="{name: 'MoviesView', params: {id, slug}}"
       class="c-movie-card__image-link"
@@ -22,13 +32,26 @@
 </template>
 
 <script>
+  import {mapActions} from 'vuex'
+
   export default {
     props: {
       id: String,
       imageUrl: String,
       name: String,
       slug: String,
-      rating: Number
+      rating: Number,
+      withDelete: Boolean
+    },
+    methods: {
+      ...mapActions(['deleteRecord']),
+
+      onDelete () {
+        this.deleteRecord({
+          resourceType: 'movies',
+          id: this.id
+        })
+      }
     }
   }
 </script>

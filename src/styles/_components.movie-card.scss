@@ -2,7 +2,27 @@
   display: block;
   margin: 0 auto;
   max-width: 225px;
+  position: relative;
 }
+
+  .c-movie-card__delete-button {
+    $size: 35px;
+
+    align-items: center;
+    background-color: $global-color-primary;
+    border-radius: 50%;
+    color: $white;
+    display: flex;
+    font-size: 1.5rem;
+    height: $size;
+    justify-content: center;
+    padding: 0;
+    position: absolute;
+    right: -#{$size / 2};
+    top: -#{$size / 2};
+    width: $size;
+    z-index: 1;
+  }
 
   .c-movie-card__image-link {
     margin-bottom: $global-space-1;
