@@ -7,20 +7,35 @@ import type {
 } from './flowTypes'
 
 export default {
-  getFilteredActors ({actors, search}: {actors: Actors, search: Search}) {
-    if (search.type === 'ACTORS' && search.query.length > 0) {
-      return actors
-        .filter(a => (`${a.firstName} ${a.lastName}`).includes(search.query))
-        .slice(0, 5)
-    }
-
-    return []
+  getSearchQuery ({search}: {search: Search}) {
+    return search.query
   },
-  getFilteredMovies ({movies, search}: {movies: Movies, search: Search}) {
-    if (search.type === 'MOVIES' && search.query.length > 0) {
-      return movies
-        .filter(m => m.name.includes(search.query))
+  getSearchType ({search}: {search: Search}) {
+    return search.type
+  },
+  getSearchBoxResult ({actors, movies, search}: {actors: Actors, movies: Movies, search: Search}) {
+    if (search.query.length === 0) return []
+
+    const query = search.query.toLowerCase()
+
+    if (search.type === 'ACTORS') {
+      return actors
+        .filter(a => (`${a.firstName} ${a.lastName}`).toLowerCase().includes(query))
         .slice(0, 5)
+        .map(a => ({
+          id: a.id,
+          title: `${a.firstName} ${a.lastName}`,
+          imageUrl: a.imageUrl
+        }))
+    } else if (search.type === 'MOVIES') {
+      return movies
+        .filter(m => m.name.toLowerCase().includes(query))
+        .slice(0, 5)
+        .map(m => ({
+          id: m.id,
+          title: m.name,
+          imageUrl: m.imageUrl
+        }))
     }
 
     return []
