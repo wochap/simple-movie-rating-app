@@ -75,7 +75,7 @@
       onDeleteClick () {
         this.deleteRecord({
           resourceType: 'movies',
-          id: this.id
+          id: this.movie.id
         })
       },
       onUpdateClick () {
