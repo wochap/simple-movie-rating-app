@@ -20,7 +20,7 @@ export type Movie = {
   grossIncome: number,
   actors: Ids,
   directorName: string,
-  rating: number,
+  rating?: number,
   genre: string,
   imageUrl?: string,
   coverImageUrl?: string
