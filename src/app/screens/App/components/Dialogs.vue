@@ -38,6 +38,14 @@
             </select>
             <i class="c-form-control__icon u-hide@laptop">▼</i>
           </div>
+
+          <button
+            @click="openActorCreateDialog"
+            class="c-button c-button--primary u-mt2"
+            type="button"
+          >
+            Create actor
+          </button>
         </form-field>
         <form-control-text
           label="Director Name"
@@ -217,7 +225,8 @@
       ...mapActions([
         'toggleDialog',
         'createRecord',
-        'updateRecord'
+        'updateRecord',
+        'updateActorInForm'
       ]),
 
       handleMovieDialogInput (value) {
@@ -242,6 +251,11 @@
       },
       clearActorForm () {
         this.actorForm = initialActorForm
+      },
+
+      openActorCreateDialog () {
+        this.toggleDialog({dialog: 'actor', value: true})
+        this.updateActorInForm(null)
       },
 
       handleMovieFormSubmit (event) {
