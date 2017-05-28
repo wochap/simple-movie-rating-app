@@ -1,0 +1,23 @@
+.c-dialog {
+  background-color: rgba($black, .85);
+  height: 100vh;
+  padding: $global-spacing-unit;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100vw;
+  z-index: 1;
+}
+
+  .c-dialog__content {
+    background-color: $white;
+    border-radius: 5px;
+    max-width: 650px;
+    padding: $global-spacing-unit;
+    position: relative;
+    width: 100%;
+  }
+
+  .c-dialog__hide-button {
+    @include deleteButton();
+  }
