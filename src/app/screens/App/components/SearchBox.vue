@@ -22,7 +22,14 @@
       :placeholder="searchInputPlaceholder"
     />
 
-    <ul v-if="searchBoxResult.length > 0" class="c-search-box__results u-list-reset">
+    <ul v-if="searchQuery.length > 0" class="c-search-box__results u-list-reset">
+      <p
+        v-if="searchBoxResult.length === 0"
+        class="u-m0 u-py3 u-center"
+      >
+        There's no result for "{{searchQuery}}". Try something else :)
+      </p>
+
       <li
         v-for="result in searchBoxResult"
         :key="result.id"
