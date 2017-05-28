@@ -1,0 +1,65 @@
+.c-movies-view-screen {
+
+}
+
+  .c-movies-view-screen__cover {
+    margin: 0;
+    background-position: center;
+    background-size: cover;
+    display: block;
+    height: 200px;
+    width: 100%;
+    border-radius: 0 0 45% 45%;
+
+    @include mq($from: 'laptop') {
+      height: 350px;
+      border-radius: 0 0 35% 35%;
+    };
+  }
+
+  .c-movies-view-screen__title {
+    margin: 0 0 .5rem;
+    font-size: 1.15rem;
+    line-height: 1;
+
+    @include mq($from: 'laptop') {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    };
+  }
+
+  .c-movies-view-screen__image {
+    width: 125px;
+    border-radius: 5px;
+    box-shadow: 0 4px 20px 0 rgba(168,182,191,.6);
+
+    @include mq($from: 'laptop') {
+      width: 250px;
+    };
+  }
+
+  .c-movies-view-screen__rating {
+    margin: 0;
+
+    span {
+      align-items: center;
+      color: $global-color-primary;
+      display: flex;
+      flex-direction: row;
+      font-size: 1.15rem;
+      height: 40px;
+      line-height: 1;
+
+      @include mq($from: 'laptop') {
+        font-size: 2rem;
+      };
+    }
+  }
+
+  .c-movies-view-screen__rating-select {
+    margin: 0;
+
+    select {
+      height: 40px;
+    }
+  }
