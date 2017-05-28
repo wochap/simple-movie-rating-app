@@ -25,6 +25,7 @@
     <ul v-if="searchBoxResult.length > 0" class="c-search-box__results u-list-reset">
       <li
         v-for="result in searchBoxResult"
+        :key="result.id"
         class="c-search-box__result"
         @click="navigateTo(result)"
       >
