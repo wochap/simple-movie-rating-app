@@ -15,10 +15,6 @@
     "development": {
       "plugins": [
         "transform-vue-jsx",
-        ["component", [{
-          "libraryName": "element-ui",
-          "styleLibraryName": "theme-default"
-        }]],
         "syntax-flow",
         "transform-flow-strip-types"
       ],
@@ -31,10 +27,6 @@
       "plugins": [
         "transform-vue-jsx",
         "transform-runtime",
-        ["component", [{
-          "libraryName": "element-ui",
-          "styleLibraryName": "theme-default"
-        }]],
         "syntax-flow",
         "transform-flow-strip-types"
       ],
