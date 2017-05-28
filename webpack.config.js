@@ -10,12 +10,14 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const {getIfUtils, removeEmpty} = require('webpack-config-utils')
 
 const CURRENT_IP = require('my-local-ip')()
 const externalPath = `http://${CURRENT_IP}:${process.env.WEBPACK_SERVER_PORT}/`
 const {ifProduction, ifNotProduction, ifDevelopment} = getIfUtils(process.env.NODE_ENV)
 const rootNodeModulesPath = resolve(__dirname, 'node_modules')
+const distPath = resolve(__dirname, 'dist')
 
 module.exports = {
   context: resolve(__dirname, 'src'),
@@ -84,7 +86,7 @@ module.exports = {
     publicPath: ifDevelopment(externalPath, '/'),
     filename: ifProduction('static/js/bundle.[name].[chunkhash:8].js', 'bundle.[name].js'),
     chunkFilename: ifProduction('static/js/chunk.[name].[chunkhash:8].js', 'chunk.[name].js'),
-    path: resolve(__dirname, 'dist'),
+    path: distPath,
     pathinfo: ifNotProduction()
   },
   module: {
@@ -309,6 +311,32 @@ module.exports = {
         minifyURLs: true
       })
     }),
+
+    ifProduction(
+      new SWPrecacheWebpackPlugin({
+        cacheId: 'simple-movie-rating-app',
+        filepath: `${distPath}/service-worker.js`,
+        maximumFileSizeToCacheInBytes: 4194304,
+        minify: true,
+        verbose: true,
+        staticFileGlobs: [
+          `${distPath}/static/css/**/!(*map*)`,
+          `${distPath}/static/js/**/!(*map*)`
+        ],
+        runtimeCaching: [
+          {
+            handler: 'networkOnly',
+            urlPattern: /\.(png|jpg|jpeg|gif)$/
+          }, {
+            handler: 'networkFirst',
+            urlPattern: /.pdf$/
+          }, {
+            // use a network first strategy for everything else.
+            default: 'networkFirst'
+          }
+        ]
+      })
+    ),
 
     process.env.BROWSER_SYNC && ifNotProduction(
       new BrowserSyncPlugin({
