@@ -3,10 +3,21 @@
   margin: 0 auto;
   max-width: 225px;
   position: relative;
+
+  &:hover {
+    .c-movie-card__delete-button,
+    .c-movie-card__update-button {
+      display: flex;
+    }
+  }
 }
 
   .c-movie-card__delete-button {
     @include deleteButton();
+  }
+
+  .c-movie-card__update-button {
+    @include deleteButton(true);
   }
 
   .c-movie-card__image-link {
