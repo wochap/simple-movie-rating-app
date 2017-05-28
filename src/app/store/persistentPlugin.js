@@ -7,13 +7,13 @@ import {
 } from './module/mutationTypes'
 
 export default function persistent (store) {
-  store.subscribe(({type, payload: {resourceType}}, rootState) => {
+  store.subscribe(({type, payload}, rootState) => {
     switch (type) {
       case CREATE_RECORD:
       case UPDATE_RECORD:
       case DELETE_RECORD: {
-        const key = resourceType === 'actors' ? ACTORS_KEY : MOVIES_KEY
-        localStorage.setItem(key, JSON.stringify(rootState[resourceType]))
+        const key = payload.resourceType === 'actors' ? ACTORS_KEY : MOVIES_KEY
+        localStorage.setItem(key, JSON.stringify(rootState[payload.resourceType]))
         break
       }
       case RATE_MOVIE: {
