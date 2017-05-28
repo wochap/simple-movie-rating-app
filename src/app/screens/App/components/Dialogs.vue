@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- MOVIES -->
     <vue-dialog
       :value="isMovieOpen"
       @input="handleMovieDialogInput"
@@ -63,6 +64,84 @@
         </div>
       </form>
     </vue-dialog>
+
+    <!-- ACTORS -->
+    <vue-dialog
+      :value="isActorOpen"
+      @input="handleActorDialogInput"
+    >
+      <form @submit.prevent="handleActorFormSubmit">
+        <form-control-text
+          label="First name"
+          placeholder="Leonardo"
+          v-model="actorForm.firstName"
+        />
+        <form-control-text
+          label="Last name"
+          placeholder="DiCaprio"
+          v-model.number="actorForm.lastName"
+        />
+        <form-field label="Gender">
+          <label class="c-form-control c-form-control--radio">
+            <input
+              class="c-form-control__input"
+              name="radio"
+              type="radio"
+              value="1"
+              v-model="actorForm.gender"
+            />
+            <span class="c-form-control__label">Male</span>
+          </label>
+          <label class="c-form-control c-form-control--radio">
+            <input
+              class="c-form-control__input"
+              name="radio"
+              type="radio"
+              value="2"
+              v-model="actorForm.gender"
+            />
+            <span class="c-form-control__label">Female</span>
+          </label>
+        </form-field>
+        <form-field label="Birth date" id="birthDate">
+          <div class="c-form-control c-form-control--select">
+            <input
+              class="c-form-control__input"
+              type="date"
+              placeholder="Select his birth date"
+              id="birthDate"
+              v-model="actorForm.birthDate"
+            />
+          </div>
+        </form-field>
+        <form-field label="Movies" id="movies">
+          <div class="c-form-control c-form-control--select">
+            <select
+              id="movies"
+              v-model="actorForm.movies"
+              multiple
+              class="c-form-control__input"
+            >
+              <option
+                v-for="movie in movies"
+                :value="movie.id"
+              >
+                {{movie.name}}
+              </option>
+            </select>
+            <i class="c-form-control__icon u-hide@laptop">▼</i>
+          </div>
+        </form-field>
+        <form-control-text
+          label="Image url"
+          placeholder="https://..."
+          v-model="actorForm.imageUrl"
+        />
+        <div class="u-right-align">
+          <button type="submit" class="o-button c-button c-button--primary u-mt2">{{actorSubmitBtnLabel}}</button>
+        </div>
+      </form>
+    </vue-dialog>
   </div>
 </template>
 
@@ -81,18 +160,28 @@
     coverImageUrl: ''
   }
 
+  const initialActorForm = {
+    firstName: '',
+    lastName: '',
+    gender: 1,
+    birthDate: new Date(),
+    movies: [],
+    imageUrl: ''
+  }
+
   export default {
     data () {
       return {
         movieForm: initialMovieForm,
-        autorForm: {}
+        actorForm: initialActorForm
       }
     },
     computed: {
       ...mapGetters({
         isMovieOpen: 'getMovieDialogValue',
         isActorOpen: 'getActorDialogValue',
-        actors: 'getActors'
+        actors: 'getActors',
+        movies: 'getMovies'
       }),
       movieInForm () {
         return this.$store.state.movieInForm
@@ -103,6 +192,9 @@
 
       movieSubmitBtnLabel () {
         return this.movieInForm ? 'Update movie' : 'Create movie'
+      },
+      actorSubmitBtnLabel () {
+        return this.actorInForm ? 'Update actor' : 'Create actor'
       }
     },
     watch: {
@@ -111,6 +203,13 @@
           this.fillMovieForm()
         } else {
           this.clearMovieForm()
+        }
+      },
+      actorInForm (value) {
+        if (value) {
+          this.fillActorForm()
+        } else {
+          this.clearActorForm()
         }
       }
     },
@@ -124,6 +223,9 @@
       handleMovieDialogInput (value) {
         this.toggleDialog({dialog: 'movie', value})
       },
+      handleActorDialogInput (value) {
+        this.toggleDialog({dialog: 'actor', value})
+      },
 
       fillMovieForm () {
         this.movieForm = {...this.movieInForm}
@@ -131,6 +233,14 @@
       clearMovieForm () {
         this.movieForm = initialMovieForm
       },
+
+      fillActorForm () {
+        this.actorForm = {...this.actorInForm}
+      },
+      clearActorForm () {
+        this.actorForm = initialActorForm
+      },
+
       handleMovieFormSubmit (event) {
         // TODO: validate movieForm
 
@@ -153,6 +263,34 @@
 
         // close dialog
         this.handleMovieDialogInput(false)
+
+        // go to movie screen
+        // this.$router.push({name: 'MovieScreen', {
+        //   id:
+        // }})
+      },
+      handleActorFormSubmit (event) {
+        // TODO: validate actorForm
+
+        if (this.actorInForm) {
+          // update actor
+          this.updateRecord({
+            resourceType: 'actors',
+            record: {
+              ...this.actorInForm,
+              ...this.actorForm
+            }
+          })
+        } else {
+          // create actor
+          this.createRecord({
+            resourceType: 'actors',
+            record: this.actorForm
+          })
+        }
+
+        // close dialog
+        this.handleActorDialogInput(false)
 
         // go to movie screen
         // this.$router.push({name: 'MovieScreen', {
