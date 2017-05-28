@@ -57,6 +57,7 @@ const mutations = {
     const newRecord = {
       ...record,
       // generate unique id
+      rating: 0,
       id: rndm(8)
     }
 
