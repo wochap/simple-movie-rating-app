@@ -48,6 +48,19 @@
               <span class="c-chip">{{genre}}</span>
             </li>
           </ul>
+
+          <p class="u-mt0 u-mb2">
+            <span class="u-black">Release Year:</span>
+            {{movie.releaseYear}}
+          </p>
+          <p class="u-mt0 u-mb2">
+            <span class="u-black">Gross income:</span>
+            {{movie.grossIncome | currency}}
+          </p>
+          <p class="u-mt0 u-mb2">
+            <span class="u-black">Director:</span>
+            {{movie.directorName}}
+          </p>
         </div>
       </div>
 
