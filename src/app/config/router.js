@@ -1,4 +1,4 @@
-import {isProduction} from './constants'
+// import {isProduction} from './constants'
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import routes from './rootRoutes'
@@ -6,7 +6,8 @@ import routes from './rootRoutes'
 Vue.use(VueRouter)
 
 const router = new VueRouter({
-  mode: isProduction ? 'history' : 'hash',
+  // mode: isProduction ? 'history' : 'hash',
+  mode: 'hash',
   linkActiveClass: 'is-active',
   routes
 })
