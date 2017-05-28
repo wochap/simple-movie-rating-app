@@ -12,7 +12,7 @@
         :key="movie.id"
         class="o-grid__item u-12/12 u-6/12@mobile u-4/12@tablet u-2/12@laptop"
       >
-        <movie-card v-bind="movie" with-delete />
+        <movie-card :movie="movie" with-delete with-update />
       </li>
     </ul>
   </div>

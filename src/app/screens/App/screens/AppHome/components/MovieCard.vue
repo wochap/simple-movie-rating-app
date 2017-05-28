@@ -3,30 +3,39 @@
     <button
       v-if="withDelete"
       class="o-button c-movie-card__delete-button"
-      @click="onDelete"
+      @click="onDeleteClick"
       title="Delete movie"
       aria-label="Delete movie"
     >
-      x
+      <i class="u-icon">delete</i>
+    </button>
+    <button
+      v-if="withUpdate"
+      class="o-button c-movie-card__update-button"
+      @click="onUpdateClick"
+      title="Update movie"
+      aria-label="Update movie"
+    >
+      <i class="u-icon">pencil</i>
     </button>
 
     <router-link
-      :to="{name: 'MoviesView', params: {id, slug}}"
+      :to="movieRoute"
       class="c-movie-card__image-link"
-      :title="name"
+      :title="movie.name"
     >
-      <img :src="imageUrl" :alt="name" />
+      <img :src="movie.imageUrl" :alt="movie.name" />
     </router-link>
 
     <h3 class="c-movie-card__name">
       <router-link
-        :to="{name: 'MoviesView', params: {id, slug}}"
+        :to="movieRoute"
       >
-        {{name}}
+        {{movie.name}}
       </router-link>
     </h3>
     <p class="c-movie-card__rating">
-      Rating: <span>{{rating | formatRating}}</span>
+      Rating: <span>{{movie.rating | formatRating}}</span>
     </p>
   </div>
 </template>
@@ -36,21 +45,42 @@
 
   export default {
     props: {
-      id: String,
-      imageUrl: String,
-      name: String,
-      slug: String,
-      rating: Number,
-      withDelete: Boolean
+      movie: Object,
+      withDelete: {
+        type: Boolean,
+        default: false
+      },
+      withUpdate: {
+        type: Boolean,
+        default: false
+      }
+    },
+    computed: {
+      movieRoute () {
+        const {id, slug} = this.movie
+
+        return {
+          name: 'MoviesView',
+          params: {id, slug}
+        }
+      }
     },
     methods: {
-      ...mapActions(['deleteRecord']),
+      ...mapActions([
+        'deleteRecord',
+        'toggleDialog',
+        'updateMovieInForm'
+      ]),
 
-      onDelete () {
+      onDeleteClick () {
         this.deleteRecord({
           resourceType: 'movies',
           id: this.id
         })
+      },
+      onUpdateClick () {
+        this.toggleDialog({dialog: 'movie', value: true})
+        this.updateMovieInForm(this.movie)
       }
     }
   }
