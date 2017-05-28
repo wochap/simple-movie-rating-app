@@ -76,7 +76,7 @@ export default {
     return {
       ...actor,
       fullName,
-      actorMovies
+      movies: actorMovies
     }
   },
   getMovie ({actors, movies, route}: {actors: Actors, movies: Movies, route: any}) {
@@ -92,7 +92,7 @@ export default {
 
     return {
       ...movie,
-      movieActors
+      actors: movieActors
     }
   }
 }
