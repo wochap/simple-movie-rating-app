@@ -56,8 +56,8 @@ export default {
     }))
   },
 
-  getActor ({actors, movies}: {actors: Actors, movies: Movies}, id: number) {
-    const actor = actors.find(actor => actor.id === id)
+  getActor ({actors, movies, route}: {actors: Actors, movies: Movies, route: any}) {
+    const actor = actors.find(actor => actor.id === route.params.id)
 
     if (!actor) return null
 
@@ -72,8 +72,8 @@ export default {
       actorMovies
     }
   },
-  getMovie ({actors, movies}: {actors: Actors, movies: Movies}, id: number) {
-    const movie = movies.find(movie => movie.id === id)
+  getMovie ({actors, movies, route}: {actors: Actors, movies: Movies, route: any}) {
+    const movie = movies.find(movie => movie.id === route.params.id)
 
     if (!movie) return null
 
