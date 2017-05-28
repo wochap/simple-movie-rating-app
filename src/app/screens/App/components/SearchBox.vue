@@ -1,5 +1,9 @@
 <template>
-  <div class="c-search-box">
+  <div
+    ref="searchBox"
+    @click.stop="clearSearchString"
+    class="c-search-box"
+  >
     <select
       class="c-search-box__select"
       slot="prepend"
@@ -50,6 +54,17 @@
           : 'Leonardo DiCaprio, Billy Zane, etc'
       }
     },
+    mounted () {
+      document.addEventListener('click', this.clearSearchString)
+      document.addEventListener('keyup', (event) => {
+        if (event.keyCode === 27) {
+          this.clearSearchString()
+        }
+      })
+    },
+    beforeDestroy () {
+
+    },
     methods: {
       ...mapActions([
         'updateSearchQuery',
@@ -74,6 +89,12 @@
         })
 
         this.updateSearchQuery('')
+      },
+
+      clearSearchString () {
+        if (this.searchQuery.length > 0) {
+          this.updateSearchQuery('')
+        }
       }
     }
   }
