@@ -1,0 +1,141 @@
+/*------------------------------------*\
+  #FORM-CONTROL
+\*------------------------------------*/
+
+// Notes:
+// * Asegurate el la variable $global-line-height la uses en tu body.
+
+
+
+
+
+/**
+ * 1. Centrar select caret icon.
+ * 2. Fill background color.
+ * 3. Inline icon with label.
+ */
+
+.c-form-control {
+  display: block;
+  width: 100%;
+
+  // TODO: cambiar color de texto si asi lo quieres
+}
+
+  .c-form-control__label {
+
+    .c-form-control--checkbox & {
+      align-items: flex-start; /* [3] */
+      display: flex; /* [3] */
+      flex-direction: row; /* [3] */
+
+      &::before {
+        @include shared-icon-styles();
+
+        background-size: 100%;
+        border-radius: 0.125em;
+      }
+    }
+
+    .c-form-control--radio & {
+      align-items: flex-start; /* [3] */
+      display: flex; /* [3] */
+      flex-direction: row; /* [3] */
+
+      &::before {
+        @include shared-icon-styles();
+
+        background-size: 50%;
+        border-radius: 50%;
+      }
+    }
+
+    .c-form-control--checkbox.is-error &,
+    .c-form-control--radio.is-error & {
+      &::before {
+        color: $wo-form-color-error;
+      }
+    }
+  }
+
+  .c-form-control__input {
+    appearance: none;
+
+    .c-form-control--checkbox & {
+      @include visually-hidden();
+      @include shared-check-element-styles();
+
+      &:checked ~ .c-form-control__label::before {
+        background-color: currentColor; /* [2] */
+        background-image: url($wo-form-icon-checkbox-checked);
+      }
+    }
+
+    .c-form-control--radio & {
+      @include visually-hidden();
+      @include shared-check-element-styles();
+
+      &:checked ~ .c-form-control__label::before {
+        background-color: currentColor; /* [2] */
+        background-image: url($wo-form-icon-radio-checked);
+        border: none;
+      }
+    }
+
+    .c-form-control--text & {
+      @include textbox();
+    }
+
+    .c-form-control--select & {
+      @include textbox();
+
+      &:disabled ~ .c-form-control__icon {
+        color: $wo-form-color-disabled;
+      }
+    }
+
+    .c-form-control--select.is-error &,
+    .c-form-control--text.is-error & {
+      border-color: $wo-form-color-error;
+      background-color: scale-color($wo-form-color-error, $lightness: 50%);
+    }
+  }
+
+  .c-form-control__icon {
+    font-style: normal;
+
+    .c-form-control--select & {
+      color: $wo-form-color-primary;
+      // content: "▼";
+      display: block;
+      line-height: $wo-form-icon-line-height; /* [1] */
+      position: absolute; /* [1] */
+      right: $wo-form-box-padding-unit; /* [1] */
+      top: $wo-form-box-padding-unit; /* [1] */
+    }
+
+    .c-form-control--select:hover & {
+      color: scale-color($wo-form-color-primary, $lightness: 50%);
+    }
+
+    .c-form-control--select.is-error & {
+      color: $wo-form-color-error;
+    }
+  }
+
+
+.c-form-control--select {
+  position: relative; /* [1] */
+
+  // &::after {
+  //
+  // }
+  //
+  // &:hover::after {
+  //   color: scale-color($wo-form-color-primary, $lightness: 50%);
+  // }
+  //
+  // &.is-error::after {
+  //   color: $wo-form-color-error;
+  // }
+}

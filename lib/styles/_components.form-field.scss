@@ -1,0 +1,81 @@
+/*------------------------------------*\
+  #FORM-FIELD
+\*------------------------------------*/
+
+// This component hold the control and the errors.
+// By default this component is responsive.
+
+
+
+
+
+/**
+ * 1. Get the message error from `data-error` attribute.
+ * 2. Inline form, but not the error message.
+ * 3. The width of this item is based on its content width.
+ * 4. Take up the remaining space available,
+ *    but when it is too tight, it will do a break line.
+ */
+
+.c-form-field {
+  display: block;
+  width: 100%;
+
+  & + .c-form-field {
+    margin-top: $global-space-2;
+  }
+
+  // error message styles
+  &::after {
+    color: $wo-form-color-error;
+    content: attr(data-error); /* [1] */
+    display: none;
+    flex: none; /* [2] */
+    font-weight: $global-fw-s-bold;
+    width: 100%;
+  }
+
+  &.c-form-field--horizontal {
+    align-items: center; /* [2] */
+    display: flex; /* [2] */
+    flex-direction: row; /* [2] */
+    flex-wrap: wrap; /* [2] */
+    justify-content: flex-start; /* [2] */
+  }
+
+  &.is-error {
+
+    &::after {
+      display: block;
+    }
+  }
+}
+
+  .c-form-field__label {
+    display: block;
+    width: 100%;
+
+    &::after {
+      content: ":"
+    }
+
+    .c-form-field--horizontal & {
+      flex: 0 1 auto; /* [3] */
+      margin-right: .5em;
+      width: auto; /* [3] */
+
+      @include mq($until: 'tablet') {
+        width: 100%;
+      };
+    }
+  }
+
+  .c-form-field__control {
+    display: block;
+    width: 100%;
+
+    .c-form-field--horizontal & {
+      flex: 1 1 auto; /* [4] */
+      width: auto; /* [4] */
+    }
+  }

@@ -1,0 +1,104 @@
+@mixin visually-hidden () {
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  width: 1px !important;
+}
+
+
+@mixin global-outline-styles () {
+  outline-offset: 2px;
+  outline: 2px solid rgba(#000000, .25);
+}
+
+
+/**
+ * 1. Centrar input con el label.
+ */
+
+@mixin shared-icon-styles () {
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: $wo-form-border-width solid currentColor;
+  color: $wo-form-color-primary;
+  content: "";
+  display: inline-block;
+  flex: none;
+  height: 1em; /* [1] */
+  margin-right: .25em;
+  position: relative; /* [1] */
+  top: 1em * (($wo-form-icon-line-height - 1) / 2); /* [1] */
+  width: 1em;
+}
+
+
+@mixin shared-check-element-styles () {
+
+  &:disabled ~ .c-form-control__label {
+    &,
+    &::before {
+      cursor: not-allowed;
+    }
+
+    &::before {
+      color: $wo-form-color-disabled;
+    }
+  }
+
+  &:focus ~ .c-form-control__label::before {
+    @include global-outline-styles();
+  }
+
+  &:hover {
+    & ~ .c-form-control__label::before {
+      outline: none;
+    }
+  }
+}
+
+
+/**
+ * Fix font size.
+ * Cross browser same height.
+ */
+
+@mixin textbox () {
+  border-radius: $wo-form-border-radius;
+  border: $wo-form-border-width solid $wo-form-color-primary;
+  color: inherit;
+  display: block;
+  font: inherit; /* [1] */
+  font-size: 14px;
+  line-height: 1; /* [2] */
+  padding: ($wo-form-box-padding-unit * 1.25) $wo-form-box-padding-unit;
+  width: 100%;
+
+  // TODO: cambiar background si asi lo quieres
+
+  &::placeholder {
+    color: inherit;
+    opacity: .5;
+  }
+
+  &:hover {
+    border-color: scale-color($wo-form-color-primary, $lightness: 50%);
+  }
+
+  &:focus {
+    @include global-outline-styles();
+
+    border-color: $wo-form-color-primary;
+  }
+
+  &:disabled {
+    background-color: rgba($wo-form-color-disabled, .5);
+    border-color: $wo-form-color-disabled;
+    cursor: not-allowed;
+  }
+
+  &:active,
+  &:hover {
+    outline: none;
+  }
+}
