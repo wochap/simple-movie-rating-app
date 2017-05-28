@@ -1,22 +1,16 @@
 <template>
   <div>
-    <h1>AppScreen</h1>
-
-    Foo: {{foo}}
-
-    <input :value="foo" @input="event => updateFoo(event.target.value)" type="text" />
+    <nav-bar />
+    <router-view />
   </div>
 </template>
 
 <script>
-  import {mapGetters, mapActions} from 'vuex'
+  import NavBar from './NavBar'
 
   export default {
-    computed: {
-      ...mapGetters(['foo'])
-    },
-    methods: {
-      ...mapActions(['updateFoo'])
+    components: {
+      NavBar
     }
   }
 </script>
