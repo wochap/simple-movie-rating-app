@@ -3,6 +3,7 @@
     <router-link
       :to="{name: 'MoviesView', params: {id, slug}}"
       class="c-movie-card__image-link"
+      :title="name"
     >
       <img :src="imageUrl" :alt="name" />
     </router-link>
