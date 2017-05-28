@@ -34,10 +34,21 @@ export type Search = {
   type: "ACTORS"|"MOVIES"
 }
 
+export type UpdateMovieInFormPayload = Movie | null
+export type UpdateActorInFormPayload = Actor | null
+
 export type State = {
   search: Search,
   actors: Actors,
-  movies: Movies
+  movies: Movies,
+
+  movieInForm: UpdateMovieInFormPayload,
+  actorInForm: UpdateActorInFormPayload,
+
+  dialogs: {
+    movie: boolean,
+    actor: boolean
+  }
 }
 
 // root state key resource
@@ -58,4 +69,9 @@ export type SearchType = 'ACTORS' | 'MOVIES'
 export type RateMoviePayload = {
   movieId: string,
   rating: number
+}
+
+export type ToggleDialogPayload = {
+  dialog: 'autor' | 'movie',
+  value?: boolean
 }

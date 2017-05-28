@@ -6,14 +6,20 @@ import {
   DELETE_RECORD,
   UPDATE_SEARCH_QUERY,
   UPDATE_SEARCH_TYPE,
-  RATE_MOVIE
+  RATE_MOVIE,
+  UPDATE_MOVIE_IN_FORM,
+  UPDATE_ACTOR_IN_FORM,
+  TOGGLE_DIALOG
 } from './mutationTypes'
 
 import type {
   CreateRecordPayload,
   DeleteRecordPayload,
   SearchType,
-  RateMoviePayload
+  RateMoviePayload,
+  UpdateMovieInFormPayload,
+  UpdateActorInFormPayload,
+  ToggleDialogPayload
 } from './flowTypes'
 
 export default {
@@ -45,5 +51,21 @@ export default {
 
   rateMovie ({commit}: any, payload: RateMoviePayload) {
     commit(RATE_MOVIE, payload)
+  },
+
+  updateMovieInForm ({commit}: any, payload: UpdateMovieInFormPayload) {
+    commit(UPDATE_MOVIE_IN_FORM, payload)
+  },
+  updateActorInForm ({commit}: any, payload: UpdateActorInFormPayload) {
+    commit(UPDATE_ACTOR_IN_FORM, payload)
+  },
+
+  toggleDialog ({commit, state}: any, payload: ToggleDialogPayload) {
+    // togle dialog
+    if (!payload.value) {
+      payload.value = !state.dialogs[payload.dialog]
+    }
+
+    commit(TOGGLE_DIALOG, payload)
   }
 }

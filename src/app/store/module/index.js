@@ -8,7 +8,10 @@ import {
   DELETE_RECORD,
   UPDATE_SEARCH_QUERY,
   UPDATE_SEARCH_TYPE,
-  RATE_MOVIE
+  RATE_MOVIE,
+  UPDATE_MOVIE_IN_FORM,
+  UPDATE_ACTOR_IN_FORM,
+  TOGGLE_DIALOG
 } from './mutationTypes'
 import getters from './getters'
 import actions from './actions'
@@ -19,7 +22,10 @@ import type {
   CreateRecordPayload,
   DeleteRecordPayload,
   SearchType,
-  RateMoviePayload
+  RateMoviePayload,
+  UpdateMovieInFormPayload,
+  UpdateActorInFormPayload,
+  ToggleDialogPayload
 } from './flowTypes'
 
 /**
@@ -31,7 +37,15 @@ const state: State = {
     type: 'MOVIES'
   },
   actors: JSON.parse(localStorage.getItem(ACTORS_KEY) || 'null') || fakeActors,
-  movies: JSON.parse(localStorage.getItem(MOVIES_KEY) || 'null') || fakeMovies
+  movies: JSON.parse(localStorage.getItem(MOVIES_KEY) || 'null') || fakeMovies,
+
+  movieInForm: null,
+  actorInForm: null,
+
+  dialogs: {
+    movie: false,
+    actor: false
+  }
 }
 
 const mutations = {
@@ -102,6 +116,17 @@ const mutations = {
       ...record,
       rating
     })
+  },
+
+  [UPDATE_MOVIE_IN_FORM] (state: State, movie: UpdateMovieInFormPayload) {
+    this.movieInForm = movie
+  },
+  [UPDATE_ACTOR_IN_FORM] (state: State, actor: UpdateActorInFormPayload) {
+    this.actorInForm = actor
+  },
+
+  [TOGGLE_DIALOG] (state: State, {dialog, value}: ToggleDialogPayload) {
+    state.dialogs[dialog] = value // eslint-disable-line
   }
 }
 
