@@ -1,5 +1,7 @@
 // @flow
 
+import slugify from 'slugify'
+
 import type {
   Actors,
   Movies,
@@ -42,10 +44,16 @@ export default {
   },
 
   getActors ({actors}: {actors: Actors}) {
-    return actors
+    return actors.map(a => ({
+      ...a,
+      slug: slugify((`${a.firstName} ${a.lastName}`).toLowerCase())
+    }))
   },
   getMovies ({movies}: {movies: Movies}) {
-    return movies
+    return movies.map(m => ({
+      ...m,
+      slug: slugify(m.name.toLowerCase())
+    }))
   },
 
   getActor ({actors, movies}: {actors: Actors, movies: Movies}, id: number) {
