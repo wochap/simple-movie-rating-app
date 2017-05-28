@@ -3,6 +3,8 @@
 import slugify from 'slugify'
 
 import type {
+  Actor,
+  Movie,
   Actors,
   Movies,
   Search
@@ -44,21 +46,10 @@ export default {
   },
 
   getActors ({actors}: {actors: Actors}) {
-    return actors.map(a => {
-      const fullName = `${a.firstName} ${a.lastName}`
-
-      return {
-        ...a,
-        fullName,
-        slug: slugify(fullName.toLowerCase())
-      }
-    })
+    return actors.map(formatActor)
   },
   getMovies ({movies}: {movies: Movies}) {
-    return movies.map(m => ({
-      ...m,
-      slug: slugify(m.name.toLowerCase())
-    }))
+    return movies.map(formatMovie)
   },
 
   getActor ({actors, movies, route}: {actors: Actors, movies: Movies, route: any}) {
@@ -66,17 +57,17 @@ export default {
 
     if (!actor) return null
 
-    const fullName = `${actor.firstName} ${actor.lastName}`
     const actorMovies = actor.movies.reduce((movieList, movieId) => {
       const movie = movies.find(m => m.id === movieId)
+
+      if (!movie) return movieList
 
       return [...movieList, movie]
     }, [])
 
     return {
-      ...actor,
-      fullName,
-      movies: actorMovies
+      ...formatActor(actor),
+      movies: actorMovies.map(formatMovie)
     }
   },
   getMovie ({actors, movies, route}: {actors: Actors, movies: Movies, route: any}) {
@@ -87,12 +78,31 @@ export default {
     const movieActors = movie.actors.reduce((actorList, actorId) => {
       const actor = actors.find(a => a.id === actorId)
 
+      if (!actor) return actorList
+
       return [...actorList, actor]
     }, [])
 
     return {
-      ...movie,
-      actors: movieActors
+      ...formatMovie(movie),
+      actors: movieActors.map(formatActor)
     }
+  }
+}
+
+function formatActor (actor: Actor) {
+  const fullName = `${actor.firstName} ${actor.lastName}`
+
+  return {
+    ...actor,
+    fullName,
+    slug: slugify(fullName.toLowerCase())
+  }
+}
+
+function formatMovie (movie: Movie) {
+  return {
+    ...movie,
+    slug: slugify(movie.name.toLowerCase())
   }
 }
