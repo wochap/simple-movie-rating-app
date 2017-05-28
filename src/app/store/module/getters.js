@@ -52,6 +52,11 @@ export default {
   getMovies ({movies}: {movies: Movies}) {
     return movies.map(formatMovie)
   },
+  getMoviesByDateDesc ({movies}: {movies: Movies}) {
+    return movies
+      .map(formatMovie)
+      .sort((a, b) => b.releaseYear - a.releaseYear)
+  },
 
   getActor ({actors, movies, route}: {actors: Actors, movies: Movies, route: any}) {
     const actor = actors.find(actor => actor.id === route.params.id)

@@ -28,7 +28,7 @@
     },
     computed: {
       ...mapGetters({
-        movies: 'getMovies'
+        movies: 'getMoviesByDateDesc'
       })
     }
   }
