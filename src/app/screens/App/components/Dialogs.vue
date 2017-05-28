@@ -172,7 +172,7 @@
     firstName: '',
     lastName: '',
     gender: 1,
-    birthDate: new Date(),
+    birthDate: formatDateForInput(new Date()),
     movies: [],
     imageUrl: ''
   }
