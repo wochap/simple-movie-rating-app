@@ -120,10 +120,10 @@ const mutations = {
   },
 
   [UPDATE_MOVIE_IN_FORM] (state: State, movie: UpdateMovieInFormPayload) {
-    this.movieInForm = movie
+    state.movieInForm = movie
   },
   [UPDATE_ACTOR_IN_FORM] (state: State, actor: UpdateActorInFormPayload) {
-    this.actorInForm = actor
+    state.actorInForm = actor
   },
 
   [TOGGLE_DIALOG] (state: State, {dialog, value}: ToggleDialogPayload) {
