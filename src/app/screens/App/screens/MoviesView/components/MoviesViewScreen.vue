@@ -61,6 +61,21 @@
             <span class="u-black">Director:</span>
             {{movie.directorName}}
           </p>
+
+          <button
+            class="c-button c-button--primary u-mb2"
+            type="button"
+            @click="handleEditClick"
+          >
+            Edit movie
+          </button>
+          <button
+            class="c-button c-button--primary u-mb2"
+            type="button"
+            @click="handleDeleteClick"
+          >
+            Delete movie
+          </button>
         </div>
       </div>
 
@@ -107,7 +122,12 @@
       }
     },
     methods: {
-      ...mapActions(['rateMovie']),
+      ...mapActions([
+        'rateMovie',
+        'toggleDialog',
+        'updateMovieInForm',
+        'deleteRecord'
+      ]),
 
       handleRatingSelectInput (event) {
         this.rateMovie({
@@ -120,6 +140,22 @@
         if (!this.movie) {
           this.$router.replace('/404')
         }
+      },
+
+      handleEditClick () {
+        this.toggleDialog({dialog: 'movie', value: true})
+        this.updateMovieInForm({
+          ...this.movie,
+          actors: this.movie.actors.map(a => a.id)
+        })
+      },
+      handleDeleteClick () {
+        this.deleteRecord({
+          resourceType: 'movies',
+          id: this.movie.id
+        })
+
+        this.$router.push({name: 'AppHome'})
       }
     }
   }
