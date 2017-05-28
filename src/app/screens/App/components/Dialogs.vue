@@ -235,7 +235,10 @@
       },
 
       fillActorForm () {
-        this.actorForm = {...this.actorInForm}
+        this.actorForm = {
+          ...this.actorInForm,
+          birthDate: formatDateForInput(this.actorInForm.birthDate)
+        }
       },
       clearActorForm () {
         this.actorForm = initialActorForm
@@ -298,6 +301,10 @@
         // }})
       }
     }
+  }
+
+  function formatDateForInput (date) {
+    return (new Date(date)).toISOString().substring(0, 10)
   }
 </script>
 
