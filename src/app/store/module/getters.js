@@ -44,10 +44,15 @@ export default {
   },
 
   getActors ({actors}: {actors: Actors}) {
-    return actors.map(a => ({
-      ...a,
-      slug: slugify((`${a.firstName} ${a.lastName}`).toLowerCase())
-    }))
+    return actors.map(a => {
+      const fullName = `${a.firstName} ${a.lastName}`
+
+      return {
+        ...a,
+        fullName,
+        slug: slugify(fullName.toLowerCase())
+      }
+    })
   },
   getMovies ({movies}: {movies: Movies}) {
     return movies.map(m => ({
@@ -61,6 +66,7 @@ export default {
 
     if (!actor) return null
 
+    const fullName = `${actor.firstName} ${actor.lastName}`
     const actorMovies = actor.movies.reduce((movieList, movieId) => {
       const movie = movies.find(m => m.id === movieId)
 
@@ -69,6 +75,7 @@ export default {
 
     return {
       ...actor,
+      fullName,
       actorMovies
     }
   },
