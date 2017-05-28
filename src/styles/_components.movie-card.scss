@@ -1,0 +1,33 @@
+.c-movie-card {
+  display: block;
+  margin: 0 auto;
+  max-width: 225px;
+}
+
+  .c-movie-card__image-link {
+    margin-bottom: $global-space-1;
+    display: block;
+
+    img {
+      border-radius: 5px;
+    }
+  }
+
+  .c-movie-card__name {
+    margin: 0 0 $global-space-1;
+    font-size: 1rem;
+    line-height: 1;
+
+    &:hover {
+      color: $global-color-primary;
+    }
+  }
+
+  .c-movie-card__rating {
+    margin: 0;
+    line-height: 1;
+
+    span {
+      color: $global-color-primary;
+    }
+  }
