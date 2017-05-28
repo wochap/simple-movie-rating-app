@@ -25,7 +25,8 @@ import type {
   RateMoviePayload,
   UpdateMovieInFormPayload,
   UpdateActorInFormPayload,
-  ToggleDialogPayload
+  ToggleDialogPayload,
+  ResourceType
 } from './flowTypes'
 
 /**
@@ -56,12 +57,19 @@ const mutations = {
   ) {
     const newRecord = {
       ...record,
-      // generate unique id
       rating: 0,
+      // generate unique id
       id: rndm(8)
     }
 
     state[resourceType] = [newRecord, ...state[resourceType]]
+
+    // add record id to relations
+    if (resourceType === 'actors') {
+      linkResources(state, 'actors', 'movies', newRecord) // eslint-disable-line
+    } else if (resourceType === 'movies') {
+      linkResources(state, 'movies', 'actors', newRecord) // eslint-disable-line
+    }
   },
   // update record from actors or movies
   [UPDATE_RECORD] (
@@ -70,7 +78,21 @@ const mutations = {
   ) {
     const recordIndex = state[resourceType].findIndex(r => r.id === record.id)
 
+    // remove record id from relations
+    if (resourceType === 'actors') {
+      unlinkResources(state, 'actors', 'movies', record.id) // eslint-disable-line
+    } else if (resourceType === 'movies') {
+      unlinkResources(state, 'movies', 'actors', record.id) // eslint-disable-line
+    }
+
     state[resourceType].splice(recordIndex, 1, record) // eslint-disable-line
+
+    // add record id to relations
+    if (resourceType === 'actors') {
+      linkResources(state, 'actors', 'movies', record) // eslint-disable-line
+    } else if (resourceType === 'movies') {
+      linkResources(state, 'movies', 'actors', record) // eslint-disable-line
+    }
   },
   // delete record from actors or movies
   [DELETE_RECORD] (
@@ -83,19 +105,10 @@ const mutations = {
     state[resourceType].splice(recordIndex, 1)
 
     // remove record id from relations
-    // TODO: refactor DRY
     if (resourceType === 'actors') {
-      state.movies.forEach(movie => {
-        const actorIndex = movie.actors.findIndex(_id => _id === id)
-
-        movie.actors.splice(actorIndex, 1)
-      })
+      unlinkResources(state, 'actors', 'movies', id)
     } else if (resourceType === 'movies') {
-      state.actors.forEach(actor => {
-        const movieIndex = actor.movies.findIndex(_id => _id === id)
-
-        actor.movies.splice(movieIndex, 1)
-      })
+      unlinkResources(state, 'movies', 'actors', id)
     }
   },
 
@@ -136,4 +149,24 @@ export default {
   getters,
   actions,
   mutations
+}
+
+// delete rtA_id from all rtB
+function unlinkResources (state: State, resourceTypeA: ResourceType, resourceTypeB: ResourceType, id: string) {
+  state[resourceTypeB].forEach(resource => {
+    const resourceTypeBIndex = resource[resourceTypeA].indexOf(id) // eslint-disable-line
+
+    if (resourceTypeBIndex === -1) return
+
+    resource[resourceTypeA].splice(resourceTypeBIndex, 1) // eslint-disable-line
+  })
+}
+
+// add rtA_id to all rtB that is within rtA[rtB]
+function linkResources (state: State, resourceTypeA: ResourceType, resourceTypeB: ResourceType, record: any) {
+  state[resourceTypeB].forEach(resource => {
+    if (record[resourceTypeB].includes(resource.id)) {
+      resource[resourceTypeA].push(record.id) // eslint-disable-line
+    }
+  })
 }

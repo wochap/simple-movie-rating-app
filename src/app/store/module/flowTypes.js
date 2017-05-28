@@ -1,6 +1,6 @@
 // @flow
 
-type Ids = Array<number>
+type Ids = Array<string>
 
 export type Actor = {
   id?: string,
@@ -54,7 +54,7 @@ export type State = {
 }
 
 // root state key resource
-type ResourceType = 'actors' | 'movies'
+export type ResourceType = 'actors' | 'movies'
 
 export type CreateRecordPayload = {
   resourceType: ResourceType,
